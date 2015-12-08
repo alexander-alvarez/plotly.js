@@ -13,10 +13,10 @@ var Plotly = require('../../plotly');
 var d3 = require('d3');
 var isNumeric = require('fast-isnumeric');
 
-var bars = module.exports = {};
 
-Plotly.Plots.register(bars, 'bar',
-    ['cartesian', 'bar', 'oriented', 'markerColorscale', 'errorBarsOK', 'showLegend'], {
+var bars = module.exports = {
+    name = 'bar',
+    categories: ['cartesian', 'bar', 'oriented', 'markerColorscale', 'errorBarsOK', 'showLegend'],
     description: [
         'The data visualized by the span of the bars is set in `y`',
         'if `orientation` is set th *v* (the default)',
@@ -24,8 +24,7 @@ Plotly.Plots.register(bars, 'bar',
 
         'By setting `orientation` to *h*, the roles are interchanged.'
     ].join(' ')
-});
-
+};
 
 bars.attributes = require('./attributes');
 

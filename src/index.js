@@ -15,9 +15,15 @@
  */
 
 var Plotly = require('./plotly');
+var Registry = require('./registry');
+
 
 // export the version found in the package.json
 exports.version = require('../package.json').version;
+
+var Bars = require('./traces/bars');
+
+Registry.registerTrace(Bars);
 
 // plot api
 exports.plot = Plotly.plot;
