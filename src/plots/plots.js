@@ -480,7 +480,7 @@ plots.supplyDataDefaults = function(traceIn, i, layout) {
     traceOut.index = i;
     var visible = coerce('visible'),
         scene,
-        module;
+        _module;
 
     coerce('type');
     coerce('uid');
@@ -494,14 +494,14 @@ plots.supplyDataDefaults = function(traceIn, i, layout) {
     // module-specific attributes --- note: we need to send a trace into
     // the 3D modules to have it removed from the webgl context.
     if(visible || scene) {
-        module = plots.getModule(traceOut);
-        traceOut._module = module;
+        _module = Registry.getModule(traceOut);
+        traceOut._module = _module;
     }
 
     // gets overwritten in pie and geo
     if(visible) coerce('hoverinfo', (layout._dataLength === 1) ? 'x+y+z+text' : undefined);
 
-    if(module && visible) module.supplyDefaults(traceIn, traceOut, defaultColor, layout);
+    if(_module && visible) _module.supplyDefaults(traceIn, traceOut, defaultColor, layout);
 
     if(visible) {
         coerce('name', 'trace ' + i);
