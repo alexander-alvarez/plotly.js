@@ -6,8 +6,6 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-'use strict';
-
 /*
  * Export the plotly.js API methods.
  *
