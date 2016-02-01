@@ -204,10 +204,9 @@ var DRAGCURSORS = {
     lasso: 'crosshair'
 };
 
-function handleCartesian(gd, ev) {
-    var button = ev.currentTarget,
-        astr = button.getAttribute('data-attr'),
-        val = button.getAttribute('data-val') || true,
+function handleCartesian(gd) {
+    var astr = this.attr,
+        val = this.val || true,
         fullLayout = gd._fullLayout,
         aobj = {};
 
@@ -240,11 +239,12 @@ function handleCartesian(gd, ev) {
             }
         }
     }
+
     else {
         // if ALL traces have orientation 'h', 'hovermode': 'x' otherwise: 'y'
         if (astr==='hovermode' && (val==='x' || val==='y')) {
             val = fullLayout._isHoriz ? 'y' : 'x';
-            button.setAttribute('data-val', val);
+            this.val = val;
         }
 
         aobj[astr] = val;
@@ -300,10 +300,9 @@ modeBarButtons.tableRotation = {
     click: handleDrag3d
 };
 
-function handleDrag3d(gd, ev) {
-    var button = ev.currentTarget,
-        attr = button.getAttribute('data-attr'),
-        val = button.getAttribute('data-val') || true,
+function handleDrag3d(gd) {
+    var attr = this.attr,
+        val = this.val || true,
         layoutUpdate = {};
 
     layoutUpdate[attr] = val;
@@ -331,9 +330,8 @@ modeBarButtons.resetCameraLastSave3d = {
     click: handleCamera3d
 };
 
-function handleCamera3d(gd, ev) {
-    var button = ev.currentTarget,
-        attr = button.getAttribute('data-attr'),
+function handleCamera3d(gd) {
+    var attr = this.attr,
         layout = gd.layout,
         fullLayout = gd._fullLayout,
         sceneIds = Plotly.Plots.getSubplotIds(fullLayout, 'gl3d');
@@ -367,9 +365,8 @@ modeBarButtons.hoverClosest3d = {
     toggle: true,
     icon: Icons.tooltip_basic,
     gravity: 'ne',
-    click: function(gd, ev) {
-        var button = ev.currentTarget,
-            val = JSON.parse(button.getAttribute('data-val')) || false,
+    click: function(gd) {
+        var val = this.val || false,
             fullLayout = gd._fullLayout,
             sceneIds = Plotly.Plots.getSubplotIds(fullLayout, 'gl3d');
 
@@ -383,7 +380,7 @@ modeBarButtons.hoverClosest3d = {
 
         if(val) {
             layoutUpdate = val;
-            button.setAttribute('data-val', JSON.stringify(null));
+            this.val = null;
         }
         else {
             layoutUpdate = {'allaxes.showspikes': false};
@@ -405,7 +402,7 @@ modeBarButtons.hoverClosest3d = {
                 }
             }
 
-            button.setAttribute('data-val', JSON.stringify(currentSpikes));
+            this.val = currentSpikes;
         }
 
         Plotly.relayout(gd, layoutUpdate);
@@ -450,10 +447,9 @@ modeBarButtons.hoverClosestGeo = {
     click: handleGeo
 };
 
-function handleGeo(gd, ev) {
-    var button = ev.currentTarget,
-        attr = button.getAttribute('data-attr'),
-        val = button.getAttribute('data-val') || true,
+function handleGeo(gd) {
+    var attr = this.attr,
+        val = this.val || true,
         fullLayout = gd._fullLayout,
         geoIds = Plotly.Plots.getSubplotIds(fullLayout, 'geo');
 

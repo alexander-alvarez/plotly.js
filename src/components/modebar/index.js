@@ -234,6 +234,26 @@ proto.hasButtons = function(buttons) {
 };
 
 /**
+ * Gets callback function attributed to a button
+ *
+ * @Param buttonName {string} name of button (see {ModeBar})
+ * @returns {function} or null if buttonName is not resolved
+ */
+proto.getModeBarButtonFunction = function(buttonName) {
+    var buttons = this.buttons;
+    if (buttons && buttons.length){
+        // buttons is a nested array
+        var flatButtons = [].concat.apply([], buttons);
+        var desiredButton = flatButtons.filter(function(button){
+            button.name = buttonName;
+        });
+        if (desiredButton.length > 0){
+            return desiredButton[0].click;
+        }
+    }
+};
+
+/**
  * @return {HTMLDivElement} The logo image wrapped in a group
  */
 proto.getLogo = function() {
